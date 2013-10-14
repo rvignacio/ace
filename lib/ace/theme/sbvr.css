@@ -1,0 +1,26 @@
+.ace_sbvr_label_term {
+	color: #ff3232;
+}
+
+.ace_sbvr_label_fact_type {
+	color: #aa7700;
+}
+
+.ace_sbvr_label_rule {
+	color: #229999;
+}
+
+.ace_sbvr_term {
+	color: #108070;
+	text-decoration: underline;
+}
+
+.ace_sbvr_verb {
+	color: #0000ff;
+}
+
+.ace_sbvr_rule {
+}
+
+.ace_sbvr_fact_type {
+}
