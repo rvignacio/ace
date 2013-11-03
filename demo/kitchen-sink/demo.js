@@ -245,7 +245,7 @@ commands.addCommand({
     }
 });
 
-var keybindings = {    
+var keybindings = {
     ace: null, // Null = use "default" keymapping
     vim: require("ace/keyboard/vim").handler,
     emacs: "ace/keyboard/emacs",
@@ -311,7 +311,7 @@ doclist.history.index = 0;
 doclist.cycleOpen = function(editor, dir) {
     var h = this.history
     h.index += dir;
-    if (h.index >= h.length) 
+    if (h.index >= h.length)
         h.index = 0;
     else if (h.index <= 0)
         h.index = h.length - 1;
@@ -488,7 +488,7 @@ bindDropdown("split", function(value) {
         sp.setSplits(1);
     } else {
         var newEditor = (sp.getSplits() == 1);
-        sp.setOrientation(value == "below" ? sp.BELOW : sp.BESIDE);        
+        sp.setOrientation(value == "below" ? sp.BELOW : sp.BESIDE);
         sp.setSplits(2);
 
         if (newEditor) {
@@ -637,6 +637,31 @@ dom.importCssString("\
     text-indent: 0em;\
 }\
 ")*/
+
+/******************************************************************************
+ * SBVR Demo
+ */
+
+var FilteredList = require('ace/autocomplete').FilteredList;
+
+FilteredList.prototype.setFilter = function(){
+
+    var linkers = [
+        'is property of',
+        'is state of',
+        'is type of',
+        'has',
+        'is part of',
+        'includes',
+        'is included in',
+        'contains',
+        'is contained in'
+    ];
+
+    this.filtered = linkers;
+
+};
+
 });
 
 // allow easy access to ace in console, but not in ace code which uses strict
@@ -652,7 +677,7 @@ function warn() {
 }
 function def(o, key, get) {
     Object.defineProperty(o, key, {
-        configurable: true, 
+        configurable: true,
         get: get,
         set: function(val) {
             delete o[key];
