@@ -61,8 +61,11 @@ var Editor = require("ace/editor").Editor;
 
 var whitespace = require("ace/ext/whitespace");
 
+
+
 var doclist = require("./doclist");
 var modelist = require("ace/ext/modelist");
+var themelist = require("ace/ext/themelist");
 var layout = require("./layout");
 var TokenTooltip = require("./token_tooltip").TokenTooltip;
 var util = require("./util");
@@ -248,7 +251,7 @@ commands.addCommand({
     }
 });
 
-var keybindings = {
+var keybindings = {    
     ace: null, // Null = use "default" keymapping
     vim: require("ace/keyboard/vim").handler,
     emacs: "ace/keyboard/emacs",
@@ -314,7 +317,7 @@ doclist.history.index = 0;
 doclist.cycleOpen = function(editor, dir) {
     var h = this.history;
     h.index += dir;
-    if (h.index >= h.length)
+    if (h.index >= h.length) 
         h.index = 0;
     else if (h.index <= 0)
         h.index = h.length - 1;
@@ -368,6 +371,12 @@ function updateUIEditorOptions() {
     saveOption(behavioursEl, editor.getBehavioursEnabled());
 }
 
+themelist.themes.forEach(function(x){ x.value = x.theme });
+fillDropdown(themeEl, {
+    Bright: themelist.themes.filter(function(x){return !x.isDark}),
+    Dark: themelist.themes.filter(function(x){return x.isDark}),
+});
+
 event.addListener(themeEl, "mouseover", function(e){
     themeEl.desiredValue = e.target.value;
     if (!themeEl.$timer)
@@ -381,7 +390,7 @@ event.addListener(themeEl, "mouseout", function(e){
 });
 
 themeEl.updateTheme = function(){
-    env.split.setTheme(themeEl.desiredValue || themeEl.selectedValue);
+    env.split.setTheme((themeEl.desiredValue || themeEl.selectedValue));
     themeEl.$timer = null;
 };
 
@@ -490,7 +499,7 @@ bindDropdown("split", function(value) {
         sp.setSplits(1);
     } else {
         var newEditor = (sp.getSplits() == 1);
-        sp.setOrientation(value == "below" ? sp.BELOW : sp.BESIDE);
+        sp.setOrientation(value == "below" ? sp.BELOW : sp.BESIDE);        
         sp.setSplits(2);
 
         if (newEditor) {
@@ -585,29 +594,5 @@ env.editor.setOptions({
     enableBasicAutocompletion: true,
     enableSnippets: true
 });
-
-/******************************************************************************
- * SBVR Demo
- */
-
-var FilteredList = require('ace/autocomplete').FilteredList;
-
-FilteredList.prototype.setFilter = function(){
-
-    var linkers = [
-        'is property of',
-        'is state of',
-        'is type of',
-        'has',
-        'is part of',
-        'includes',
-        'is included in',
-        'contains',
-        'is contained in'
-    ];
-
-    this.filtered = linkers;
-
-};
 
 });
