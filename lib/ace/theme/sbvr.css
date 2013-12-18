@@ -17,6 +17,11 @@
 
 .ace_sbvr_verb {
 	color: #0000ff;
+	font-style: italic;
+}
+
+.ace_sbvr_special_verb {
+	color: #0000ff;
 }
 
 .ace_sbvr_rule {
@@ -31,4 +36,8 @@
 
 .ace_sbvr_quantification {
 	color: #800080;
+}
+
+.ace_sbvr_other {
+	color: #ffa500;
 }
